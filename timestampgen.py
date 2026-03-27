@@ -40,6 +40,7 @@ for i in songlister(directory):
 ttNo2=list(itertools.accumulate(noConv))
 for i in ttNo2:
     hours, minutes, seconds=durationsep(i)
+    seconds=int(seconds)
     timestamps.append([hours, minutes, seconds])
 print("CONVERTED TIMESTAMPS:\n00:00 - "+sNamesNoExt[0])
 for ind, it in enumerate(timestamps):
