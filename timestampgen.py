@@ -20,7 +20,7 @@ def durationsep(leng): # Duration Separator
     return hours, minutes, seconds
 def songlister(path): # Returns song names according to file type.
     p=Path(path)
-    files=[i.name for i in p.iterdir() if i.is_file() and i.suffix.lower() in whitelist] # need to understand
+    files=sorted([i.name for i in p.iterdir() if i.is_file() and i.suffix.lower() in whitelist]) # need to understand
     return files
 def timestFormat(h,m,s, songname): # converts the duration and song name into the timestamp format.
     if h==0:
@@ -34,7 +34,7 @@ for i in songlister(directory):
     else:
         audiof=audioread.audio_open(directory+"/"+i)
     for w in whitelist:
-        sNamesNoExt.append(i.strip(w))
+        sNamesNoExt.append(Path(i).stem)
     length=round(audiof.duration, 1)
     noConv.append(length)
 ttNo2=list(itertools.accumulate(noConv))
@@ -44,6 +44,6 @@ for i in ttNo2:
 print("CONVERTED TIMESTAMPS:\n00:00 - "+sNamesNoExt[0])
 for ind, it in enumerate(timestamps):
     if ind+1>len(timestamps)-1:
-        print(timestFormat(it[0],it[1],it[2],sNamesNoExt[-1]))
+        break
     else:
         print(timestFormat(it[0],it[1],it[2],sNamesNoExt[ind+1]))
