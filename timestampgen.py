@@ -33,8 +33,7 @@ for i in songlister(directory):
         audiof=audioread.audio_open(i)
     else:
         audiof=audioread.audio_open(directory+"/"+i)
-    for w in whitelist:
-        sNamesNoExt.append(Path(i).stem)
+    sNamesNoExt.append(Path(i).stem)
     length=round(audiof.duration, 1)
     noConv.append(length)
 ttNo2=list(itertools.accumulate(noConv))
